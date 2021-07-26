@@ -10,7 +10,7 @@ import javax.validation.Valid;
 @RequestMapping("/autor")
 public class AutorController {
 
-    private AutorRepository autorRepository;
+    private final AutorRepository autorRepository;
 
     public AutorController(AutorRepository autorRepository) {
         this.autorRepository = autorRepository;
@@ -18,7 +18,7 @@ public class AutorController {
 
     @PostMapping
     public ResponseEntity<String> novoAutor(@RequestBody @Valid AutorRequest autorRequest){
-        Autor autor = autorRequest.toModel();
+        var autor = autorRequest.toModel();
         autorRepository.save(autor);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Autor " + autor.getNome() + " cadastrado.");
