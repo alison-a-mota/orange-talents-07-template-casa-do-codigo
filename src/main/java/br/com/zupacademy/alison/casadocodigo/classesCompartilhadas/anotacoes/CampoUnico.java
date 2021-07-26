@@ -1,4 +1,4 @@
-package br.com.zupacademy.alison.casadocodigo.anotacoes;
+package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
