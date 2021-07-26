@@ -1,5 +1,7 @@
 package br.com.zupacademy.alison.casadocodigo.autor;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -7,11 +9,15 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
+@Validated
 public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(updatable = false)
+    private final LocalDateTime dataCadastro = LocalDateTime.now();
+
     @NotBlank
     private String nome;
     @NotBlank
@@ -21,10 +27,8 @@ public class Autor {
     @NotBlank
     @Size(max = 400)
     private String descricao;
-    @Column(updatable = false)
-    private final LocalDateTime dataCadastro = LocalDateTime.now();
 
-    public Autor(String nome, String email, String descricao) {
+    public Autor(@NotBlank String nome, @NotBlank String email,@NotBlank String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

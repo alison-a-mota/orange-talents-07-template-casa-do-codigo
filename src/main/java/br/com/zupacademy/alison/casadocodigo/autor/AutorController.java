@@ -21,6 +21,6 @@ public class AutorController {
         var autor = autorRequest.toModel();
         autorRepository.save(autor);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Autor " + autor.getNome() + " cadastrado.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Autor '" + autor.getNome() + "' cadastrado.");
     }
 }
