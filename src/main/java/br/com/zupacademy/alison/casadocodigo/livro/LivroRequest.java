@@ -3,8 +3,10 @@ package br.com.zupacademy.alison.casadocodigo.livro;
 import br.com.zupacademy.alison.casadocodigo.autor.Autor;
 import br.com.zupacademy.alison.casadocodigo.categoria.Categoria;
 import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class LivroRequest {
@@ -18,7 +20,7 @@ public class LivroRequest {
     private String sumario;
     @DecimalMin("20.00")
     @NotNull
-    private Double preco;
+    private BigDecimal preco;
     @Min(100)
     @NotNull
     private Integer quantidadePaginas;
@@ -40,7 +42,7 @@ public class LivroRequest {
         return sumario;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 

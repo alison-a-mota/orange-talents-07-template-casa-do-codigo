@@ -2,10 +2,13 @@ package br.com.zupacademy.alison.casadocodigo.livro;
 
 import br.com.zupacademy.alison.casadocodigo.autor.Autor;
 import br.com.zupacademy.alison.casadocodigo.categoria.Categoria;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -32,7 +35,7 @@ public class Livro {
     private String sumario;
     @DecimalMin("20.00")
     @NotNull
-    private Double preco;
+    private BigDecimal preco;
     @Min(100)
     @NotNull
     private Integer quantidadePaginas;
@@ -43,7 +46,7 @@ public class Livro {
     private LocalDate dataPublicacao;
 
     public Livro(@NotNull Categoria categoria, @NotNull Autor autor, @NotBlank String titulo, @Size(max = 500) @NotBlank String resumo,
-                 String sumario, @DecimalMin("20.00") @NotNull Double preco, @Min(100) @NotNull Integer quantidadePaginas,
+                 String sumario, @DecimalMin("20.00") @NotNull BigDecimal preco, @Min(100) @NotNull Integer quantidadePaginas,
                  @NotBlank String lsbnIdentificador, @Future LocalDate dataPublicacao) {
         this.categoria = categoria;
         this.autor = autor;
@@ -56,7 +59,6 @@ public class Livro {
         this.dataPublicacao = dataPublicacao;
     }
 
-
     public String getLsbnIdentificador() {
         return lsbnIdentificador;
     }
@@ -65,8 +67,11 @@ public class Livro {
         return titulo;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Deprecated
     public Livro() {
     }
-
 }

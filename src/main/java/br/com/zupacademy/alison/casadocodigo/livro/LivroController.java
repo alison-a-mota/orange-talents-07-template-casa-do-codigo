@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/livro/{autorId}/{categoriaId}")
+@RequestMapping("/livro")
 public class LivroController {
 
     private final LivroRepository livroRepository;
@@ -23,7 +24,7 @@ public class LivroController {
         this.categoriaRepository = categoriaRepository;
     }
 
-    @PostMapping
+    @PostMapping("/{autorId}/{categoriaId}")
     public ResponseEntity<String> novoLivro(@RequestBody @Valid LivroRequest livroRequest, @PathVariable Long autorId, @PathVariable Long categoriaId) {
 
         var autor = autorRepository.findById(autorId)
@@ -35,6 +36,11 @@ public class LivroController {
         livroRepository.save(livro);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Livro cadastrado.");
+    }
 
+    @GetMapping
+    public List<LivroResponse> listaLivros(){
+        List<Livro> livros = (List<Livro>) livroRepository.findAll();
+        return LivroResponse.toModel(livros);
     }
 }
