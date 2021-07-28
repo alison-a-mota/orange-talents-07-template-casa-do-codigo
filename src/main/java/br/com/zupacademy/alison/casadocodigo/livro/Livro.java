@@ -2,8 +2,6 @@ package br.com.zupacademy.alison.casadocodigo.livro;
 
 import br.com.zupacademy.alison.casadocodigo.autor.Autor;
 import br.com.zupacademy.alison.casadocodigo.categoria.Categoria;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -41,13 +39,13 @@ public class Livro {
     private Integer quantidadePaginas;
     @Column(unique = true)
     @NotBlank
-    private String lsbnIdentificador;
+    private String isbnIdentificador;
     @Future
     private LocalDate dataPublicacao;
 
     public Livro(@NotNull Categoria categoria, @NotNull Autor autor, @NotBlank String titulo, @Size(max = 500) @NotBlank String resumo,
                  String sumario, @DecimalMin("20.00") @NotNull BigDecimal preco, @Min(100) @NotNull Integer quantidadePaginas,
-                 @NotBlank String lsbnIdentificador, @Future LocalDate dataPublicacao) {
+                 @NotBlank String isbnIdentificador, @Future LocalDate dataPublicacao) {
         this.categoria = categoria;
         this.autor = autor;
         this.titulo = titulo;
@@ -55,12 +53,12 @@ public class Livro {
         this.sumario = sumario;
         this.preco = preco;
         this.quantidadePaginas = quantidadePaginas;
-        this.lsbnIdentificador = lsbnIdentificador;
+        this.isbnIdentificador = isbnIdentificador;
         this.dataPublicacao = dataPublicacao;
     }
 
-    public String getLsbnIdentificador() {
-        return lsbnIdentificador;
+    public String getIsbnIdentificador() {
+        return isbnIdentificador;
     }
 
     public String getTitulo() {
@@ -69,6 +67,30 @@ public class Livro {
 
     public Long getId() {
         return id;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Integer getQuantidadePaginas() {
+        return quantidadePaginas;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
     }
 
     @Deprecated

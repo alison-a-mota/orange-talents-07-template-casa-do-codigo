@@ -3,18 +3,18 @@ package br.com.zupacademy.alison.casadocodigo.livro;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LivroResponse {
+public class LivroListaTodosResponse {
 
     private Long id;
     private String titulo;
 
-    public LivroResponse(Livro livro) {
+    public LivroListaTodosResponse(Livro livro) {
         this.id = livro.getId();
         this.titulo = livro.getTitulo();
     }
 
-    public static List<LivroResponse> toModel(List<Livro> livros) {
-        return livros.stream().map(LivroResponse::new).collect(Collectors.toList());
+    public static List<LivroListaTodosResponse> toModel(List<Livro> livros) {
+        return livros.stream().map(LivroListaTodosResponse::new).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -26,6 +26,6 @@ public class LivroResponse {
     }
 
     @Deprecated
-    public LivroResponse() {
+    public LivroListaTodosResponse() {
     }
 }

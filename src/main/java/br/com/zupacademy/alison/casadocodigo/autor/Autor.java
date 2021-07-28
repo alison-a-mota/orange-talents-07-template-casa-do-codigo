@@ -28,10 +28,14 @@ public class Autor {
     @Size(max = 400)
     private String descricao;
 
-    public Autor(@NotBlank String nome, @NotBlank String email,@NotBlank String descricao) {
+    public Autor(@NotBlank String nome, @NotBlank String email, @NotBlank String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
