@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Validated
@@ -91,6 +92,19 @@ public class Livro {
 
     public LocalDate getDataPublicacao() {
         return dataPublicacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(id, livro.id) && Objects.equals(categoria, livro.categoria) && Objects.equals(autor, livro.autor) && Objects.equals(titulo, livro.titulo) && Objects.equals(resumo, livro.resumo) && Objects.equals(sumario, livro.sumario) && Objects.equals(preco, livro.preco) && Objects.equals(quantidadePaginas, livro.quantidadePaginas) && Objects.equals(isbnIdentificador, livro.isbnIdentificador) && Objects.equals(dataPublicacao, livro.dataPublicacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoria, autor, titulo, resumo, sumario, preco, quantidadePaginas, isbnIdentificador, dataPublicacao);
     }
 
     @Deprecated
