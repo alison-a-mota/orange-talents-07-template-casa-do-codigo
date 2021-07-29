@@ -30,11 +30,10 @@ public class ClienteController {
     public ResponseEntity<String> novoCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
 
         validaNecessidadeDeEstado(clienteRequest);
-        Cliente cliente = clienteRequest.toModel(clienteRequest, paisRepository, estadoRepository);
+        Cliente cliente = clienteRequest.toModel(paisRepository, estadoRepository);
         clienteRepository.save(cliente);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Cliente{id=" + cliente.getId() + "}");
-
     }
 
     private void validaNecessidadeDeEstado(ClienteRequest clienteRequest) {

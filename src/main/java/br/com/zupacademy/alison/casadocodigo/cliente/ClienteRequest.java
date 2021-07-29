@@ -45,7 +45,7 @@ public class ClienteRequest {
     @ExistsById(fieldName = "id", domainClass = Pais.class)
     private Long paisId;
 
-    public Cliente toModel(ClienteRequest clienteRequest, PaisRepository paisRepository, EstadoRepository estadoRepository) {
+    public Cliente toModel(PaisRepository paisRepository, EstadoRepository estadoRepository) {
 
         Pais pais = paisRepository.findById(this.paisId).get();
         Estado estado = null;

@@ -85,23 +85,4 @@ public class Cliente {
     public int hashCode() {
         return Objects.hash(id, nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, estado, pais);
     }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobreNome='" + sobreNome + '\'' +
-                ", email='" + email + '\'' +
-                ", documento='" + documento + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", rua='" + rua + '\'' +
-                ", numero=" + numero +
-                ", complemento='" + complemento + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", cep='" + cep + '\'' +
-                ", estado=" + estado +
-                ", pais=" + pais +
-                '}';
-    }
 }
