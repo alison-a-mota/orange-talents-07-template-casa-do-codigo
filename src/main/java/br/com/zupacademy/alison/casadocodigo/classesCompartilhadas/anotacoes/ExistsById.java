@@ -9,20 +9,18 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-
 /**
  * Valida se existe um objeto do tipo String salvo no banco de dados.
  *
  * @author Alison Alves
  * @version 1.1.0
- *
  * @see Character#isWhitespace(char)
  */
 
 @Documented
 
 //Definir esse tipo de annotation como uma constraint de bean validation
-@Constraint(validatedBy = {CampoUnicoValidator.class})
+@Constraint(validatedBy = {ExistsByIdValidator.class})
 
 //Onde nossas annotations podem ser usadas.
 @Target(FIELD)
@@ -30,10 +28,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 //Especifica como a annotation marcada é armazenada. Escolhemos RUNTIME, para que possa ser usado pelo ambiente de tempo de execução.
 @Retention(RUNTIME)
 
-public @interface CampoUnico {
+public @interface ExistsById {
 
-    //Mensagem caso não valide
-    String message() default "Já existe um objeto igual salvo no banco.";
+    //Mensagem caso
+    String message() default "Objeto não encontrado no banco.";
 
     Class<?>[] groups() default {};
 

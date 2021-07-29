@@ -1,10 +1,11 @@
 package br.com.zupacademy.alison.casadocodigo.livro;
 
+import br.com.zupacademy.alison.casadocodigo.autor.Autor;
 import br.com.zupacademy.alison.casadocodigo.autor.AutorRepository;
+import br.com.zupacademy.alison.casadocodigo.categoria.Categoria;
 import br.com.zupacademy.alison.casadocodigo.categoria.CategoriaRepository;
 import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.ExistsById;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -13,8 +14,10 @@ import java.time.LocalDate;
 public class LivroRequest {
 
     @NotNull
+    @ExistsById(fieldName = "id", domainClass = Autor.class)
     private Long autorId;
     @NotNull
+    @ExistsById(fieldName = "id", domainClass = Categoria.class)
     private Long categoriaId;
 
     @CampoUnico(fieldName = "titulo", domainClass = Livro.class)
@@ -73,10 +76,8 @@ public class LivroRequest {
     }
 
     public Livro toModel(CategoriaRepository categoriaRepository, AutorRepository autorRepository) {
-        var autor = autorRepository.findById(this.autorId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Autor não encontrado"));
-        var categoria = categoriaRepository.findById(this.categoriaId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria não encontrada"));
+        var autor = autorRepository.findById(this.autorId).get();
+        var categoria = categoriaRepository.findById(this.categoriaId).get();
 
         return new Livro(categoria, autor, this.titulo, this.resumo, this.sumario, this.preco, this.quantidadePaginas, this.isbnIdentificador, this.dataPublicacao);
     }

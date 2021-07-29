@@ -1,5 +1,10 @@
 package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes;
 
+import org.hibernate.validator.constraints.CompositionType;
+import org.hibernate.validator.constraints.ConstraintComposition;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -9,20 +14,17 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-
 /**
- * Valida se existe um objeto do tipo String salvo no banco de dados.
+ * Valida se é um CPF ou CNPJ válido.
  *
  * @author Alison Alves
  * @version 1.1.0
- *
- * @see Character#isWhitespace(char)
  */
 
 @Documented
 
 //Definir esse tipo de annotation como uma constraint de bean validation
-@Constraint(validatedBy = {CampoUnicoValidator.class})
+@Constraint(validatedBy = { })
 
 //Onde nossas annotations podem ser usadas.
 @Target(FIELD)
@@ -30,18 +32,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 //Especifica como a annotation marcada é armazenada. Escolhemos RUNTIME, para que possa ser usado pelo ambiente de tempo de execução.
 @Retention(RUNTIME)
 
-public @interface CampoUnico {
+@CPF
+@CNPJ
+@ConstraintComposition(CompositionType.OR)
 
-    //Mensagem caso não valide
-    String message() default "Já existe um objeto igual salvo no banco.";
+public @interface CpfOuCnpj {
 
-    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default { };
 
-    Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default { };
 
-    //Campo que será validado
-    String fieldName();
-
-    //Classe que será aiksdfjaosdfh asd
-    Class<?> domainClass();
+    String message() default "Não é um CPF ou um CNPJ válido.";
 }
