@@ -3,7 +3,10 @@ package br.com.zupacademy.alison.casadocodigo.cliente;
 import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
 import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CpfOuCnpj;
 import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.ExistsById;
+import br.com.zupacademy.alison.casadocodigo.estado.Estado;
+import br.com.zupacademy.alison.casadocodigo.estado.EstadoRepository;
 import br.com.zupacademy.alison.casadocodigo.pais.Pais;
+import br.com.zupacademy.alison.casadocodigo.pais.PaisRepository;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -37,13 +40,20 @@ public class ClienteRequest {
     @NotBlank
     private String cep;
 
-    private Long estado;
+    private Long estadoId;
     @NotNull
     @ExistsById(fieldName = "id", domainClass = Pais.class)
     private Long paisId;
 
-    public Cliente toModel(ClienteRequest clienteRequest) {
-        return new Cliente();
+    public Cliente toModel(ClienteRequest clienteRequest, PaisRepository paisRepository, EstadoRepository estadoRepository) {
+
+        Pais pais = paisRepository.findById(this.paisId).get();
+        Estado estado = null;
+
+        if(this.estadoId != null) {
+            estado = estadoRepository.findById(this.estadoId).get();
+            return new Cliente(nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, estado, pais);
+        } return new Cliente(nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, null, pais);
     }
 
     public String getNome() {
@@ -86,8 +96,8 @@ public class ClienteRequest {
         return cep;
     }
 
-    public Long getEstado() {
-        return estado;
+    public Long getEstadoId() {
+        return estadoId;
     }
 
     public Long getPaisId() {

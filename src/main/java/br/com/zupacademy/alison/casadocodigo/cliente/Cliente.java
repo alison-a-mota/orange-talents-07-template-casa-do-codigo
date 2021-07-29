@@ -51,6 +51,27 @@ public class Cliente {
     @NotNull
     private Pais pais;
 
+    public Cliente(@NotBlank String nome, @NotBlank String sobreNome, @NotBlank @Email String email,
+                   @NotBlank @CpfOuCnpj String documento, @NotBlank String telefone, @NotBlank String rua,
+                   @NotNull Integer numero, @NotBlank String complemento, @NotBlank String cidade, @NotBlank String cep,
+                   Estado estado, @NotNull Pais pais) {
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.email = email;
+        this.documento = documento;
+        this.telefone = telefone;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.estado = estado;
+        this.pais = pais;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -63,5 +84,24 @@ public class Cliente {
     @Override
     public int hashCode() {
         return Objects.hash(id, nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, estado, pais);
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", sobreNome='" + sobreNome + '\'' +
+                ", email='" + email + '\'' +
+                ", documento='" + documento + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", rua='" + rua + '\'' +
+                ", numero=" + numero +
+                ", complemento='" + complemento + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", cep='" + cep + '\'' +
+                ", estado=" + estado +
+                ", pais=" + pais +
+                '}';
     }
 }
