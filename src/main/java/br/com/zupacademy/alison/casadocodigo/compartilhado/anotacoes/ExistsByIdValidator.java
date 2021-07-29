@@ -1,6 +1,4 @@
-package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes;
-
-import org.springframework.util.Assert;
+package br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

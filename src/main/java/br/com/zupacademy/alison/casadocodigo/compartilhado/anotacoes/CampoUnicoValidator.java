@@ -1,4 +1,4 @@
-package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes;
+package br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,4 +1,4 @@
-package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.handlers;
+package br.com.zupacademy.alison.casadocodigo.compartilhado.handlers;
 
 public class ExceptionResponse {
 

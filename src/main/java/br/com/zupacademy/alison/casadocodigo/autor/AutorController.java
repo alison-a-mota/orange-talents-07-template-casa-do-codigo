@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+//@CreationTimestamp
+
 @RestController
 @RequestMapping("/autor")
 public class AutorController {
@@ -17,10 +19,10 @@ public class AutorController {
     }
 
     @PostMapping
-    public ResponseEntity<String> novoAutor(@RequestBody @Valid AutorRequest autorRequest){
+    public ResponseEntity<AutorCreatedResponse> cadastrar(@RequestBody @Valid AutorRequest autorRequest){
         var autor = autorRequest.toModel();
         autorRepository.save(autor);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Autor '" + autor.getNome() + "' cadastrado.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AutorCreatedResponse(autor.getId(), autor.getNome()));
     }
 }

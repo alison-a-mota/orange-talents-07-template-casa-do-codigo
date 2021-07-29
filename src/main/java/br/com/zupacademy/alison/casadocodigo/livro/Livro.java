@@ -90,10 +90,6 @@ public class Livro {
         return quantidadePaginas;
     }
 
-    public LocalDate getDataPublicacao() {
-        return dataPublicacao;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

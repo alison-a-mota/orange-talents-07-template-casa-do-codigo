@@ -10,8 +10,9 @@ public class AutorSiteResponse {
         this.descricao = descricao;
     }
 
-    public static AutorSiteResponse conversorResponse(Autor autor) {
-        return new AutorSiteResponse(autor.getNome(), autor.getDescricao());
+    public AutorSiteResponse(Autor autor) {
+        this.nome = autor.getNome();
+        this.descricao = autor.getDescricao();
     }
 
     public String getNome() {
@@ -20,13 +21,5 @@ public class AutorSiteResponse {
 
     public String getDescricao() {
         return descricao;
-    }
-
-    @Override
-    public String toString() {
-        return "AutorResponse{" +
-                "nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
     }
 }

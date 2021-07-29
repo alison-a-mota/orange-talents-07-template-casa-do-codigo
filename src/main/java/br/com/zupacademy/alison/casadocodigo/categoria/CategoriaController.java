@@ -20,10 +20,10 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<String> novaCategoria(@RequestBody @Valid CategoriaRequest categoriaRequest) {
+    public ResponseEntity<CategoriaCreatedResponse> cadastrar(@RequestBody @Valid CategoriaRequest categoriaRequest) {
         Categoria categoria = categoriaRequest.toModel();
         categoriaRepository.save(categoria);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Categoria '" + categoria.getNome() + "' criada.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CategoriaCreatedResponse(categoria.getId(), categoria.getNome()));
     }
 }

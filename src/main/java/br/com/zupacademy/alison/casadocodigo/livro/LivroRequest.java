@@ -4,8 +4,8 @@ import br.com.zupacademy.alison.casadocodigo.autor.Autor;
 import br.com.zupacademy.alison.casadocodigo.autor.AutorRepository;
 import br.com.zupacademy.alison.casadocodigo.categoria.Categoria;
 import br.com.zupacademy.alison.casadocodigo.categoria.CategoriaRepository;
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.ExistsById;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CampoUnico;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.ExistsById;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;

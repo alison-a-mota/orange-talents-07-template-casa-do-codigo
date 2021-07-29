@@ -1,4 +1,4 @@
-package br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes;
+package br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes;
 
 import org.hibernate.validator.constraints.CompositionType;
 import org.hibernate.validator.constraints.ConstraintComposition;

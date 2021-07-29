@@ -1,6 +1,6 @@
 package br.com.zupacademy.alison.casadocodigo.categoria;
 
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CampoUnico;
 
 import javax.validation.constraints.NotBlank;
 

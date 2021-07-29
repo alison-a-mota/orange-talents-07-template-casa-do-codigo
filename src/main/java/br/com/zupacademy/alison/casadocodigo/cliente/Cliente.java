@@ -1,6 +1,6 @@
 package br.com.zupacademy.alison.casadocodigo.cliente;
 
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CpfOuCnpj;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CpfOuCnpj;
 import br.com.zupacademy.alison.casadocodigo.estado.Estado;
 import br.com.zupacademy.alison.casadocodigo.pais.Pais;
 import org.springframework.validation.annotation.Validated;
@@ -33,17 +33,8 @@ public class Cliente {
     @NotBlank
     private String telefone;
 
-    //Endereço
-    @NotBlank
-    private String rua;
-    @NotNull
-    private Integer numero;
-    @NotBlank
-    private String complemento;
-    @NotBlank
-    private String cidade;
-    @NotBlank
-    private String cep;
+    @Embedded
+    private Endereco endereco;
 
     @ManyToOne
     private Estado estado;
@@ -52,19 +43,14 @@ public class Cliente {
     private Pais pais;
 
     public Cliente(@NotBlank String nome, @NotBlank String sobreNome, @NotBlank @Email String email,
-                   @NotBlank @CpfOuCnpj String documento, @NotBlank String telefone, @NotBlank String rua,
-                   @NotNull Integer numero, @NotBlank String complemento, @NotBlank String cidade, @NotBlank String cep,
+                   @NotBlank @CpfOuCnpj String documento, @NotBlank String telefone, @NotNull Endereco endereco,
                    Estado estado, @NotNull Pais pais) {
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.email = email;
         this.documento = documento;
         this.telefone = telefone;
-        this.rua = rua;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.cep = cep;
+        this.endereco = endereco;
         this.estado = estado;
         this.pais = pais;
     }
@@ -73,16 +59,11 @@ public class Cliente {
         return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(sobreNome, cliente.sobreNome) && Objects.equals(email, cliente.email) && Objects.equals(documento, cliente.documento) && Objects.equals(telefone, cliente.telefone) && Objects.equals(rua, cliente.rua) && Objects.equals(numero, cliente.numero) && Objects.equals(complemento, cliente.complemento) && Objects.equals(cidade, cliente.cidade) && Objects.equals(cep, cliente.cep) && Objects.equals(estado, cliente.estado) && Objects.equals(pais, cliente.pais);
+    public String getNome() {
+        return nome;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, estado, pais);
+    @Deprecated
+    public Cliente() {
     }
 }

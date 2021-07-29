@@ -20,7 +20,7 @@ public class PaisController {
     }
 
     @PostMapping
-    public ResponseEntity<String> novoPais(@Valid @RequestBody PaisRequest paisRequest) {
+    public ResponseEntity<String> cadastrar(@Valid @RequestBody PaisRequest paisRequest) {
         Pais pais = paisRequest.toModel();
         paisRepository.save(pais);
 

@@ -1,5 +1,8 @@
 package br.com.zupacademy.alison.casadocodigo.livro;
 
+import br.com.zupacademy.alison.casadocodigo.autor.Autor;
+import br.com.zupacademy.alison.casadocodigo.autor.AutorSiteResponse;
+
 import java.math.BigDecimal;
 
 public class LivroDetalhadoSiteResponse {
@@ -10,19 +13,16 @@ public class LivroDetalhadoSiteResponse {
     private final BigDecimal preco;
     private final Integer quantidadePaginas;
     private final String isbnIdentificador;
+    private final AutorSiteResponse autorSiteResponse;
 
-    public LivroDetalhadoSiteResponse(String titulo, String resumo, String sumario, BigDecimal preco, Integer quantidadePaginas, String isbnIdentificador) {
-        this.titulo = titulo;
-        this.resumo = resumo;
-        this.sumario = sumario;
-        this.preco = preco;
-        this.quantidadePaginas = quantidadePaginas;
-        this.isbnIdentificador = isbnIdentificador;
-    }
-
-    public static LivroDetalhadoSiteResponse conversorResponse(Livro livro) {
-        return new LivroDetalhadoSiteResponse(livro.getTitulo(), livro.getResumo(), livro.getSumario(), livro.getPreco(),
-                livro.getQuantidadePaginas(), livro.getIsbnIdentificador());
+    public LivroDetalhadoSiteResponse(Livro livro, Autor autor) {
+        this.titulo = livro.getTitulo();
+        this.resumo = livro.getResumo();
+        this.sumario = livro.getSumario();
+        this.preco = livro.getPreco();
+        this.quantidadePaginas = livro.getQuantidadePaginas();
+        this.isbnIdentificador = livro.getIsbnIdentificador();
+        this.autorSiteResponse = new AutorSiteResponse(autor);
     }
 
     public String getTitulo() {
@@ -49,15 +49,7 @@ public class LivroDetalhadoSiteResponse {
         return isbnIdentificador;
     }
 
-    @Override
-    public String toString() {
-        return "LivroDetalhadoResponse{" +
-                "titulo='" + titulo + '\'' +
-                ", resumo='" + resumo + '\'' +
-                ", sumario='" + sumario + '\'' +
-                ", preco=" + preco +
-                ", quantidadePaginas=" + quantidadePaginas +
-                ", isbnIdentificador='" + isbnIdentificador + '\'' +
-                '}';
+    public AutorSiteResponse getAutorSiteResponse() {
+        return autorSiteResponse;
     }
 }

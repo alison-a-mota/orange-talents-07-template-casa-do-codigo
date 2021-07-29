@@ -27,13 +27,13 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<String> novoCliente(@Valid @RequestBody ClienteRequest clienteRequest) {
+    public ResponseEntity<ClienteCreatedResponse> cadastrar(@Valid @RequestBody ClienteRequest clienteRequest) {
 
         validaNecessidadeDeEstado(clienteRequest);
         Cliente cliente = clienteRequest.toModel(paisRepository, estadoRepository);
         clienteRepository.save(cliente);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Cliente{id=" + cliente.getId() + "}");
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ClienteCreatedResponse(cliente.getId(), cliente.getNome()));
     }
 
     private void validaNecessidadeDeEstado(ClienteRequest clienteRequest) {

@@ -1,12 +1,14 @@
 package br.com.zupacademy.alison.casadocodigo.cliente;
 
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CpfOuCnpj;
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.ExistsById;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CampoUnico;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CpfOuCnpj;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.ExistsById;
 import br.com.zupacademy.alison.casadocodigo.estado.Estado;
 import br.com.zupacademy.alison.casadocodigo.estado.EstadoRepository;
 import br.com.zupacademy.alison.casadocodigo.pais.Pais;
 import br.com.zupacademy.alison.casadocodigo.pais.PaisRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -47,13 +49,13 @@ public class ClienteRequest {
 
     public Cliente toModel(PaisRepository paisRepository, EstadoRepository estadoRepository) {
 
-        Pais pais = paisRepository.findById(this.paisId).get();
+        Pais pais = paisRepository.findById(this.paisId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "País não encontrado"));
         Estado estado = null;
 
         if(this.estadoId != null) {
-            estado = estadoRepository.findById(this.estadoId).get();
-            return new Cliente(nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, estado, pais);
-        } return new Cliente(nome, sobreNome, email, documento, telefone, rua, numero, complemento, cidade, cep, null, pais);
+            estado = estadoRepository.findById(this.estadoId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estado não encontrado."));
+            return new Cliente(nome, sobreNome, email, documento, telefone, new Endereco(rua, numero, complemento, cidade, cep), estado, pais);
+        } return new Cliente(nome, sobreNome, email, documento, telefone, new Endereco(rua, numero, complemento, cidade, cep), null, pais);
     }
 
     public String getNome() {

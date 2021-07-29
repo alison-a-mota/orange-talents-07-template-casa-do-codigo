@@ -1,6 +1,6 @@
 package br.com.zupacademy.alison.casadocodigo.autor;
 
-import br.com.zupacademy.alison.casadocodigo.classesCompartilhadas.anotacoes.CampoUnico;
+import br.com.zupacademy.alison.casadocodigo.compartilhado.anotacoes.CampoUnico;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -32,9 +32,5 @@ public class AutorRequest {
 
     public String getDescricao() {
         return descricao;
-    }
-
-    @Deprecated
-    public AutorRequest() {
     }
 }
